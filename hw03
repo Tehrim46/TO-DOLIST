@@ -1,0 +1,60 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class TODOLIST {
+
+    private ArrayList<String> tasks;
+    private HashMap<String, String> dueDates;
+
+    public TODOLIST() {
+        tasks = new ArrayList<>();
+        dueDates = new HashMap<>();
+    }
+
+    public void addTask(String task, String dueDate) {
+        tasks.add(task);
+        dueDates.put(task, dueDate);
+        System.out.println("Task Added: " + task + " (Due: " + dueDate + ")");
+    }
+
+    public void displayTasks() {
+        if (tasks.isEmpty()) {
+            System.out.println("You have no tasks.");
+        } else {
+            System.out.println("To-Do List:");
+            for (int i = 0; i < tasks.size(); i++) {
+                String task = tasks.get(i);
+                String dueDate = dueDates.get(task);
+                System.out.println((i + 1) + ". " + task + " (Due: " + dueDate + ")");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        TODOLIST toDoList = new TODOLIST();
+        
+        System.out.println("Welcome To Your To-Do List!");
+        System.out.println("Enter your tasks. Type 'done' when you are finished:");
+        
+        while (true) {
+            System.out.print("Enter Task: ");
+            String task = scanner.nextLine();
+            
+            if (task.equalsIgnoreCase("done")) {
+                break;
+            }
+            
+            System.out.print("Enter Due Date for \"" + task + "\": ");
+            String dueDate = scanner.nextLine();
+            
+            toDoList.addTask(task, dueDate);
+        }
+        
+        System.out.println("\nYour Tasks:");
+        toDoList.displayTasks();
+        
+        scanner.close();
+    }
+}
